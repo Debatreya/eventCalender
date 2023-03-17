@@ -4,10 +4,11 @@ const daysContainer = document.querySelector(".days");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 let today = new Date();
-let activeDay;
+var activeDay
 let month = today.getMonth();
 let year = today.getFullYear();
 const dateInput = document.querySelector(".date-input");
+console.log(activeDay);
 const months = [
     "January", 
     "February",
@@ -48,6 +49,10 @@ function initCalendar(){
         if (i == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
             days += `<div class="day today active">${i}</div>`;
         }
+        else if(i == activeDay)
+        {
+            days += `<div class="day focus">${i}</div>`;
+        }
         else{
             days += `<div class="day">${i}</div>`;
         }
@@ -87,6 +92,7 @@ function btntoday()
     today = new Date();
     month = today.getMonth();
     year = today.getFullYear();
+    activeDay = today.getDate();
     initCalendar();
 }
 //adding eventlistner on prev and next
@@ -94,6 +100,11 @@ prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
 document.querySelector(".today-btn").addEventListener("click", btntoday);
 
-dateInput.addEventListener("keyup", (e)=>{
-    dateInput.value = dateInput.value.replace()
-})
+function go() {
+    let input = dateInput.value;
+    let d = new Date(input);
+     year = d.getFullYear();
+     month = d.getMonth();
+     activeDay = d.getDate();
+     initCalendar();
+}
