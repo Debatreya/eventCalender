@@ -17,7 +17,8 @@ body{
     color: #fff;
     display: flex;
     border-radius: 10px;
-    background-color: #373c4f;
+    /* background-color: #373c4f; */
+    background: radial-gradient(#8EE4AF, #5CDB95, #878895);
 }
 .left{
     width: 60%;
@@ -48,7 +49,8 @@ body{
 .calendar::before{
     height: 94%;
     left: calc(100% + 12px);
-    background-color: rgb(153, 153, 153);
+    /* background-color: rgb(153, 153, 153); */
+    background-color: #14a084;
 }
 .month{
     width: 100%;
@@ -103,5 +105,28 @@ body{
     justify-content: center;
     cursor: pointer;
     color: var(--primary-clr);
-    border: 1px solid lightcoral;
+    /* border: 1px solid lightcoral; */
+    border-radius: 90px;
 }
+.days .day:not(.next-date, .prev-date, .active):hover{
+    background: linear-gradient(#5CDB95, #878895);
+    border: 2px solid #8EE4AF;
+    color: #fff;
+}
+.days .prev-date, .days .next-date{
+    color: #bbb;
+}
+.active{
+    font-size: 1.5rem;
+    color: #fff;
+    background: radial-gradient(#5CDB95, #878895);
+}
+/* .active::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 2px #8EE4AF;
+} */
