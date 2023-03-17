@@ -21,7 +21,7 @@ body{
     background: radial-gradient(#8EE4AF, #5CDB95, #878895);
 }
 .left{
-    width: 60%;
+    width: 90%;
     padding: 20px;
 }
 .calendar{
@@ -154,5 +154,33 @@ body{
     align-items: center;
     border-radius: 5px;
     overflow: hidden;/*WHat is it???*/
-    border: 1px solid #14a084;
+    border: 2px solid #14a084;
+}
+.goto input{
+    color-scheme: light;
+    width: 100%;
+    height: 30px;
+    padding: 0 20px;
+    outline: none;
+    border-radius: 5px;
+}
+.goto-today button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--primary-clr);
+    font-weight: 800;
+    /* background: radial-gradient(#5CDB95, #878895); */
+}
+.goto-today button:hover{
+    height: 30px;
+    background: linear-gradient(#5CDB95, #878895);
+    /* border: 2px solid #8EE4AF; */
+    color: #fff;
+}
+.goto button{
+    border: none;
+    border-left: 1px solid var(--primary-clr);
+    border-radius: 0;
 }
