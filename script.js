@@ -4,11 +4,10 @@ const daysContainer = document.querySelector(".days");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 let today = new Date();
-var activeDay
+let activeDay
 let month = today.getMonth();
 let year = today.getFullYear();
 const dateInput = document.querySelector(".date-input");
-console.log(activeDay);
 const months = [
     "January", 
     "February",
@@ -23,7 +22,43 @@ const months = [
     "November",
     "December"
 ];
-
+//default events array
+const eventsArr =[
+    {
+        day: 26,
+        month: 3,
+        year: 2023,
+        events: [
+            {
+                title: "Technobyte Freshers party",
+                time: "10:00 AM",
+            },
+            {
+                title: "4days left for midsem 1",
+                time: "08:00PM",
+            },
+        ]
+    },
+    {
+        day: 20,
+        month: 4,
+        year: 2023,
+        events: [
+            {
+                title: "Technobyte Freshers party",
+                time: "10:00 AM",
+            },
+            {
+                title: "4days left for midsem 1",
+                time: "08:00PM",
+            },
+            {
+                title: "Event 3",
+                time: "08:00AM",
+            },
+        ]
+    },
+]
 //function to add days
 
 function initCalendar(){
@@ -46,15 +81,39 @@ function initCalendar(){
     }
     //current month days
     for (let i = 1; i < lastDate; i++) {
+        //check if event is present
+        let event = false;
+        for (let p = 0; p < eventsArr.length; p++) {
+            const element = eventsArr[p];
+            eventsArr.forEach((eventObj) => {
+                if(eventObj.day == i && eventObj.month == month+1 && eventObj.year==year){
+                    event = true;
+                }
+            });
+        }
         if (i == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
-            days += `<div class="day today active">${i}</div>`;
+            if(event){
+                days += `<div class="day event active today">${i}</div>`;
+            }
+            else{
+                days += `<div class="day active today">${i}</div>`;
+            }
         }
         else if(i == activeDay)
         {
-            days += `<div class="day focus">${i}</div>`;
+            console.log(activeDay);
+            if(event){
+                days += `<div class="day event focus">${i}</div>`;
+            }
+            else
+                days += `<div class="day focus">${i}</div>`;
         }
         else{
-            days += `<div class="day">${i}</div>`;
+            if(event){
+                days += `<div class="day event">${i}</div>`;
+            }
+            else
+                days += `<div class="day">${i}</div>`;
         }
         
     }
@@ -106,5 +165,58 @@ function go() {
      year = d.getFullYear();
      month = d.getMonth();
      activeDay = d.getDate();
+     console.log(activeDay);
      initCalendar();
 }
+
+
+//For the events
+const addEventBtn = document.querySelector(".add-event"),
+    addEventContainer = document.querySelector(".add-event-wrapper"),
+    addEventCloseBtn = document.querySelector(".close"),
+    addEventTitle = document.querySelector(".event-name"),
+    addEventFrom = document.querySelector(".time-from"),
+    addEventTo = document.querySelector(".time-to")
+
+addEventBtn.addEventListener("click", () =>{
+    addEventContainer.classList.toggle("active");
+});
+addEventCloseBtn.addEventListener("click", () =>{
+    addEventContainer.classList.remove("active");
+});
+
+//Allowing only 50 characters
+addEventTitle.addEventListener("input", (e)=>{
+    addEventTitle.value = addEventTitle.value.slice(0, 50);
+});
+//Remove everything else numbers
+addEventFrom.addEventListener("input", (e)=>{
+    addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g, "");
+    if (addEventFrom.value.length == 2) {
+        addEventFrom.value += ":"
+    }
+    if(addEventFrom.value.length > 5){
+        addEventFrom.value = addEventFrom.value.slice(0, 5);
+    }
+});
+addEventTo.addEventListener("input", (e)=>{
+    addEventTo.value = addEventTo.value.replace(/[^0-9:]/g, "");
+    if (addEventTo.value.length == 2) {
+        addEventTo.value += ":"
+    }
+    if(addEventTo.value.length > 5){
+        addEventTo.value = addEventTo.value.slice(0, 5);
+    }
+});
+// function addListner() {
+//     const days = document.querySelector(".day")
+//     days.forEach((day) => {
+//         day.addEventListener("click", (e)=>{
+//             activeDay = Number(e.target.innerHTML)
+//             days.forEach((day) => {
+//                 day.classList.remove("active");
+//             });
+//         });
+        
+//     });
+// }
