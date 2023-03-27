@@ -8,6 +8,15 @@ let activeDay
 let month = today.getMonth();
 let year = today.getFullYear();
 const dateInput = document.querySelector(".date-input");
+const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+];
 const months = [
     "January", 
     "February",
@@ -22,6 +31,9 @@ const months = [
     "November",
     "December"
 ];
+console.log(weekdays[today.getDay()])
+let event_date = `<div class="event-day">${weekdays[today.getDay()]}</div>` + `<div class="event-date">${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()} </div>`;
+document.querySelector(".today-date").innerHTML = event_date;
 //default events array
 const eventsArr =[
     {
@@ -80,7 +92,7 @@ function initCalendar(){
         days += `<div class="day prev-date">${prevDays-x+1}</div>`
     }
     //current month days
-    for (let i = 1; i < lastDate; i++) {
+    for (let i = 1; i <= lastDate; i++) {
         //check if event is present
         let event = false;
         for (let p = 0; p < eventsArr.length; p++) {
@@ -119,7 +131,7 @@ function initCalendar(){
     }
 
     //next month days
-    for (let j = 1; j <= nextDays; j++) {
+    for (let j = 1; j < nextDays; j++) {
         days += `<div class="day next-date">${j}</div>`;
     }
     daysContainer.innerHTML = days;
